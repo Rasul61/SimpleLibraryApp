@@ -9,4 +9,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> findByFullName(String fullName);
 
     List<Author> findByCountry(String country);
+
+    Author findAuthorById(Long id);
 }
