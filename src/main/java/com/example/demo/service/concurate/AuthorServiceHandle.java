@@ -42,8 +42,8 @@ public class AuthorServiceHandle implements AuthorService {
     }
 
     @Override
-    public void updateAuthor(Long id,AuthorRequest authorRequest) {
-        Author author=authorRepository.findById(id).get();
+    public void updateAuthor(Long id, AuthorRequest authorRequest) {
+        Author author = authorRepository.findById(id).get();
         author.setFullName(authorRequest.getFullName());
         author.setCountry(authorRequest.getCountry());
         authorRepository.save(author);
@@ -53,7 +53,7 @@ public class AuthorServiceHandle implements AuthorService {
 
     @Override
     public Author getAuthorById(Long id) {
-        return null;
+        return authorRepository.findAuthorById(id);
     }
 
     @Override
