@@ -57,7 +57,7 @@ public class AuthorServiceHandle implements AuthorService {
     }
 
     @Override
-    public void deleteAuthor(Long id) {
+    public void DeleteAuthor(Long id) {
 
     }
 }
