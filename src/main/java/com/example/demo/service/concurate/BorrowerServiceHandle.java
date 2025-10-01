@@ -24,26 +24,30 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public List<Borrower> getAllBorrower() {
-        return List.of();
+        return borrowerRepository.findAll();
     }
 
     @Override
     public List<Borrower> getByName(String name) {
-        return List.of();
+        return borrowerRepository.findByName(name);
     }
 
     @Override
     public List<Borrower> getByEmail(String email) {
-        return List.of();
+        return borrowerRepository.findByEmail(email);
     }
 
     @Override
-    public void updateBorrower(Borrower borrower) {
-
+    public void updateBorrower(Long id,Borrower borrower) {
+        Borrower borrower1=borrowerRepository.findById(id).get();
+        borrower.setName(borrower1.getName());
+        borrower.setEmail(borrower1.getEmail());
+        borrowerRepository.save(borrower1);
     }
 
     @Override
     public void deleteBorrower(Long id) {
+
 
     }
 }

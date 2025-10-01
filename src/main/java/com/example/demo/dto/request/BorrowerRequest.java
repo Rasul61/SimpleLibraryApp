@@ -9,5 +9,5 @@ import java.util.List;
 public class BorrowerRequest {
     private String name;
     private String email;
-    private List<Book> bookList;
+    //private List<Book> bookList;
 }

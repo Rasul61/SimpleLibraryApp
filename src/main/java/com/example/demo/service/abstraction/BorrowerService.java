@@ -10,6 +10,6 @@ public interface BorrowerService {
     List<Borrower> getAllBorrower();
     List<Borrower> getByName(String name);
     List<Borrower> getByEmail(String email);
-    void updateBorrower(Borrower borrower);
+    void updateBorrower(Long id,Borrower borrower);
     void deleteBorrower(Long id);
 }

@@ -70,7 +70,8 @@ public class BookServiceHandle implements BookService {
 
     @Override
     public void deleteBook(Long id) {
-
+        Book book=bookRepository.findById(id).get();
+        bookRepository.delete(book);
 
     }
 }
