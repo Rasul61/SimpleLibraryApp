@@ -18,7 +18,7 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public void createBorrower(BorrowerRequest borrower) {
-        Borrower borrower1=BORROWER_MAPPER.requestToEntity(borrower);
+        Borrower borrower1 = BORROWER_MAPPER.requestToEntity(borrower);
         borrowerRepository.save(borrower1);
     }
 
@@ -38,8 +38,8 @@ public class BorrowerServiceHandle implements BorrowerService {
     }
 
     @Override
-    public void updateBorrower(Long id,Borrower borrower) {
-        Borrower borrower1=borrowerRepository.findById(id).get();
+    public void updateBorrower(Long id, Borrower borrower) {
+        Borrower borrower1 = borrowerRepository.findById(id).get();
         borrower.setName(borrower1.getName());
         borrower.setEmail(borrower1.getEmail());
         borrowerRepository.save(borrower1);
@@ -47,6 +47,8 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public void deleteBorrower(Long id) {
+        Borrower borrower = borrowerRepository.findById(id).get();
+        borrowerRepository.delete(borrower);
 
 
     }

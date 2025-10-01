@@ -1,6 +1,7 @@
 package com.example.demo.service.concurate;
 
 import com.example.demo.dto.request.AuthorRequest;
+import com.example.demo.dto.response.AuthorResponse;
 import com.example.demo.entity.Author;
 import com.example.demo.mapper.AuthorMapper;
 import com.example.demo.repository.AuthorRepository;
@@ -52,12 +53,16 @@ public class AuthorServiceHandle implements AuthorService {
     }
 
     @Override
-    public Author getAuthorById(Long id) {
-        return authorRepository.findAuthorById(id);
+    public AuthorResponse getAuthorById(Long id) {
+        Author author=authorRepository.findAuthorById(id);
+        return AUTHOR_MAPPER.entityToResponse(author);
+
+
     }
 
     @Override
     public void deleteAuthor(Long id) {
-
+      Author author=authorRepository.findById(id).get();
+      authorRepository.delete(author);
     }
 }
