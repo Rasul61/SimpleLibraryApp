@@ -1,6 +1,7 @@
 package com.example.demo.service.concurate;
 
 import com.example.demo.dto.request.BorrowerRequest;
+import com.example.demo.dto.response.BorrowerResponse;
 import com.example.demo.entity.Borrower;
 import com.example.demo.repository.BorrowerRepository;
 import com.example.demo.service.abstraction.BorrowerService;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.demo.mapper.BorrowerMapper.BORROWER_MAPPER;
 
@@ -28,20 +30,26 @@ public class BorrowerServiceHandle implements BorrowerService {
     }
 
     @Override
-    public List<Borrower> getByName(String name) {
-        return borrowerRepository.findByName(name);
+    public Optional<Borrower> getById(Long id) {
+        return borrowerRepository.findById(id);
     }
 
     @Override
-    public List<Borrower> getByEmail(String email) {
-        return borrowerRepository.findByEmail(email);
+    public BorrowerResponse getByName(String name) {
+        return (BorrowerResponse) borrowerRepository.findByName(name);
     }
 
     @Override
-    public void updateBorrower(Long id, Borrower borrower) {
+    public BorrowerResponse getByEmail(String email) {
+        return (BorrowerResponse) borrowerRepository.findByEmail(email);
+    }
+
+
+    @Override
+    public void updateBorrower(Long id, BorrowerRequest borrower) {
         Borrower borrower1 = borrowerRepository.findById(id).get();
-        borrower.setName(borrower1.getName());
-        borrower.setEmail(borrower1.getEmail());
+        borrower1.setName(borrower.getName());
+        borrower1.setEmail(borrower.getEmail());
         borrowerRepository.save(borrower1);
     }
 
