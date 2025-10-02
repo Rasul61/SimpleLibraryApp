@@ -21,12 +21,12 @@ public class BorrowerController {
         borrowerService.createBorrower(borrower);
     }
 
-    @GetMapping
+    @GetMapping("/id/{id}")
     Optional<Borrower> findWithId(@PathVariable Long id) {
         return borrowerService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping("/name/{name}")
     BorrowerResponse findWithName(@PathVariable String name) {
         return borrowerService.getByName(name);
     }
@@ -36,7 +36,7 @@ public class BorrowerController {
        return borrowerService.getAllBorrower();
     }
 
-    @GetMapping
+    @GetMapping("/email/{email}")
     BorrowerResponse findWithEmail(@PathVariable String email) {
         return borrowerService.getByEmail(email);
     }
