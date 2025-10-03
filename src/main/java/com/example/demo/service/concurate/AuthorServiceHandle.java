@@ -43,7 +43,8 @@ public class AuthorServiceHandle implements AuthorService {
 
     @Override
     public void updateAuthor(Long id, AuthorRequest authorRequest) {
-        Author author = authorRepository.findById(id).get();
+        Author author = authorRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an author with this ID for updating"));
         author.setFullName(authorRequest.getFullName());
         author.setCountry(authorRequest.getCountry());
         authorRepository.save(author);
@@ -61,7 +62,9 @@ public class AuthorServiceHandle implements AuthorService {
 
     @Override
     public void deleteAuthor(Long id) {
-        Author author = authorRepository.findById(id).get();
+        Author author = authorRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an author with this ID for deleting"));
+
         authorRepository.delete(author);
     }
 }

@@ -5,6 +5,7 @@ import com.example.demo.dto.response.AuthorResponse;
 import com.example.demo.entity.Author;
 import com.example.demo.service.abstraction.AuthorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class AuthorController {
     private final AuthorService authorService;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     void addAuthor(@RequestBody AuthorRequest author) {
         authorService.createAuthor(author);
     }
@@ -41,11 +43,13 @@ public class AuthorController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
     void updateAuthors(@PathVariable Long id, @RequestBody AuthorRequest author) {
         authorService.updateAuthor(id, author);
     }
 
     @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteAuthorById(@PathVariable Long id) {
         authorService.deleteAuthor(id);
     }

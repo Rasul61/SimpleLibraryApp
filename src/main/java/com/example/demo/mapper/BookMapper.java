@@ -4,13 +4,15 @@ import com.example.demo.dto.request.BookRequest;
 import com.example.demo.dto.response.BookResponse;
 import com.example.demo.entity.Book;
 import com.example.demo.repository.AuthorRepository;
-import lombok.AllArgsConstructor;
+import com.example.demo.repository.BorrowerRepository;
 import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
+public class BookMapper {
 
-public enum BookMapper {
-
-    BOOK_MAPPER;
+    //BOOK_MAPPER;
+    private final AuthorRepository authorRepository;
+    private final BorrowerRepository borrowerRepository;
 
     public BookResponse entityToResponse(Book book) {
         return BookResponse.builder().title(book.getTitle()).
@@ -21,6 +23,11 @@ public enum BookMapper {
     public Book requestToEntity(BookRequest bookRequest) {
         return Book.builder().title(bookRequest.getTitle()).
                 year(bookRequest.getYear()).
+                author(authorRepository.findAuthorById(bookRequest.getAuthorId())).
+                borrower(borrowerRepository.findById(bookRequest.getBorrowerId()).
+                        orElseThrow(() -> new RuntimeException("Don't find borrower with this ID"))).
                 build();
     }
+
+
 }

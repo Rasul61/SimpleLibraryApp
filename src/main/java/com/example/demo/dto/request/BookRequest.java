@@ -1,7 +1,5 @@
 package com.example.demo.dto.request;
 
-import com.example.demo.entity.Author;
-import com.example.demo.entity.Borrower;
 import lombok.Data;
 
 @Data

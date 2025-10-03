@@ -47,7 +47,8 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public void updateBorrower(Long id, BorrowerRequest borrower) {
-        Borrower borrower1 = borrowerRepository.findById(id).get();
+        Borrower borrower1 = borrowerRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an borrower with this ID for updating"));
         borrower1.setName(borrower.getName());
         borrower1.setEmail(borrower.getEmail());
         borrowerRepository.save(borrower1);
@@ -55,7 +56,8 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public void deleteBorrower(Long id) {
-        Borrower borrower = borrowerRepository.findById(id).get();
+        Borrower borrower = borrowerRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an borrower with this ID for deleting"));
         borrowerRepository.delete(borrower);
 
 

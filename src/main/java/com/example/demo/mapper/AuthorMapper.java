@@ -3,8 +3,6 @@ package com.example.demo.mapper;
 import com.example.demo.dto.request.AuthorRequest;
 import com.example.demo.dto.response.AuthorResponse;
 import com.example.demo.entity.Author;
-import com.example.demo.entity.Book;
-import org.springframework.stereotype.Component;
 
 
 public enum AuthorMapper {
