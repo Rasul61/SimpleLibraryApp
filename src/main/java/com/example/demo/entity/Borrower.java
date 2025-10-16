@@ -2,10 +2,8 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
@@ -15,15 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "borrowers")
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Borrower {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
-    private String name;
-    private String email;
+    String name;
+    String email;
 
     @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Book> bookList;
+    List<Book> bookList;
 }

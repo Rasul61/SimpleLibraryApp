@@ -1,8 +1,8 @@
 package com.example.demo.service.concurate;
 
 import com.example.demo.dto.request.AuthorRequest;
+import com.example.demo.dto.response.AuthorResponse;
 import com.example.demo.entity.Author;
-import com.example.demo.mapper.AuthorMapper;
 import com.example.demo.repository.AuthorRepository;
 import com.example.demo.repository.BookRepository;
 import com.example.demo.service.abstraction.AuthorService;
@@ -43,7 +43,8 @@ public class AuthorServiceHandle implements AuthorService {
 
     @Override
     public void updateAuthor(Long id, AuthorRequest authorRequest) {
-        Author author = authorRepository.findById(id).get();
+        Author author = authorRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an author with this ID for updating"));
         author.setFullName(authorRequest.getFullName());
         author.setCountry(authorRequest.getCountry());
         authorRepository.save(author);
@@ -52,12 +53,19 @@ public class AuthorServiceHandle implements AuthorService {
     }
 
     @Override
-    public Author getAuthorById(Long id) {
-        return authorRepository.findAuthorById(id);
+    public AuthorResponse getAuthorById(Long id) {
+        Author author = authorRepository.findAuthorById(id);
+        return AUTHOR_MAPPER.entityToResponse(author);
+
+
     }
 
-    @Override
-    public void DeleteAuthor(Long id) {
 
+    @Override
+    public void deleteAuthor(Long id) {
+        Author author = authorRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Could not find an author with this ID for deleting"));
+
+        authorRepository.delete(author);
     }
 }
