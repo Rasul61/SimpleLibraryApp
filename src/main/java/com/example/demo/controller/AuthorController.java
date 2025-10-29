@@ -42,13 +42,13 @@ public class AuthorController {
         return authorService.getAuthorById(id);
     }
 
-    @PutMapping
+    @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     void updateAuthors(@PathVariable Long id, @RequestBody AuthorRequest author) {
         authorService.updateAuthor(id, author);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteAuthorById(@PathVariable Long id) {
         authorService.deleteAuthor(id);
