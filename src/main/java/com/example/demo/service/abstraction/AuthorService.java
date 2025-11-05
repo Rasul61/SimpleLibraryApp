@@ -9,11 +9,11 @@ import java.util.List;
 public interface AuthorService {
     void createAuthor(AuthorRequest author);
 
-    List<Author> getAllAuthors();
+    List<AuthorResponse> getAllAuthors();
 
-    List<Author> findByCountry(String country);
+    List<AuthorResponse> findByCountry(String country);
 
-    List<Author> findByFullName(String fullname);
+    List<AuthorResponse> findByFullName(String fullname);
 
     void updateAuthor(Long id, AuthorRequest authorRequest);
 

@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-//import static com.example.demo.mapper.BookMapper.BOOK_MAPPER;
+import static com.example.demo.mapper.AuthorMapper.AUTHOR_MAPPER;
+import static com.example.demo.mapper.BookMapper.entityToResponse;
+
 
 @Service
 @RequiredArgsConstructor
@@ -39,9 +41,11 @@ public class BookServiceHandle implements BookService {
     }
 
     @Override
-    public List<Book> getAllBooks() {
+    public List<BookResponse> getAllBooks() {
 
-        return bookRepository.findAll();
+        return bookRepository.findAll().stream().
+                map(BookMapper::entityToResponse).
+                toList();
     }
 
     @Override
@@ -49,20 +53,24 @@ public class BookServiceHandle implements BookService {
         Book book = bookRepository.findById(id).
                 orElseThrow(() -> new RuntimeException("Could not find an author with this ID"));
 
-        return bookMapper.entityToResponse(book);
+        return entityToResponse(book);
 
     }
 
     @Override
-    public List<Book> findByTitle(String title) {
+    public List<BookResponse> findByTitle(String title) {
 
-        return bookRepository.findByTitle(title);
+        return bookRepository.findByTitle(title).stream().
+                map(BookMapper::entityToResponse).
+                toList();
     }
 
     @Override
-    public List<Book> findByYear(Integer year) {
+    public List<BookResponse> findByYear(Integer year) {
 
-        return bookRepository.findByYear(year);
+        return bookRepository.findByYear(year).stream().
+                map(BookMapper::entityToResponse).
+                toList();
     }
 
     @Override
@@ -83,9 +91,7 @@ public class BookServiceHandle implements BookService {
 
     @Override
     public void deleteBook(Long id) {
-        Book book = bookRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Could not find an book with this ID for deleting"));
-        bookRepository.delete(book);
+        bookRepository.deleteById(id);
 
     }
 }

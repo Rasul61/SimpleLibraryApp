@@ -27,7 +27,7 @@ public class BookController {
     }
 
     @GetMapping
-    List<Book> findAllBook() {
+    List<BookResponse> findAllBook() {
         return bookService.getAllBooks();
     }
 
@@ -37,12 +37,12 @@ public class BookController {
     }
 
     @GetMapping("/title/{title}")
-    List<Book> getBooksByTitle(@PathVariable String title) {
+    List<BookResponse> getBooksByTitle(@PathVariable String title) {
         return bookService.findByTitle(title);
     }
 
     @GetMapping("/year/{year}")
-    List<Book> getBooksByYear(@PathVariable Integer year) {
+    List<BookResponse> getBooksByYear(@PathVariable Integer year) {
         return bookService.findByYear(year);
     }
 
@@ -52,7 +52,7 @@ public class BookController {
         bookService.updateBook(id, bookRequest);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteById(@PathVariable Long id) {
         bookService.deleteBook(id);

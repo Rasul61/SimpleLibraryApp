@@ -24,7 +24,7 @@ public class BorrowerController {
     }
 
     @GetMapping("/id/{id}")
-    Optional<Borrower> findWithId(@PathVariable Long id) {
+    BorrowerResponse findWithId(@PathVariable Long id) {
         return borrowerService.getById(id);
     }
 
@@ -34,7 +34,7 @@ public class BorrowerController {
     }
 
     @GetMapping
-    List<Borrower> findAll() {
+    List<BorrowerResponse> findAll() {
         return borrowerService.getAllBorrower();
     }
 
@@ -43,13 +43,13 @@ public class BorrowerController {
         return borrowerService.getByEmail(email);
     }
 
-    @PutMapping
+    @PutMapping("/id/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateBorrowers(@PathVariable Long id, @RequestBody BorrowerRequest borrowerRequest) {
         borrowerService.updateBorrower(id, borrowerRequest);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/id/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBorrowers(@PathVariable Long id) {
         borrowerService.deleteBorrower(id);

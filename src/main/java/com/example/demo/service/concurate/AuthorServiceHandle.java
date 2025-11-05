@@ -27,18 +27,24 @@ public class AuthorServiceHandle implements AuthorService {
     }
 
     @Override
-    public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
+    public List<AuthorResponse> getAllAuthors() {
+        return authorRepository.findAll().stream().
+                map(AUTHOR_MAPPER::entityToResponse).
+                toList();
     }
 
     @Override
-    public List<Author> findByCountry(String country) {
-        return authorRepository.findByCountry(country);
+    public List<AuthorResponse> findByCountry(String country) {
+        return authorRepository.findByCountry(country).stream().
+                map(AUTHOR_MAPPER::entityToResponse).
+                toList();
     }
 
     @Override
-    public List<Author> findByFullName(String fullname) {
-        return authorRepository.findByFullName(fullname);
+    public List<AuthorResponse> findByFullName(String fullname) {
+        return authorRepository.findByFullName(fullname).stream().
+                map(AUTHOR_MAPPER::entityToResponse).
+                toList();
     }
 
     @Override
@@ -62,9 +68,6 @@ public class AuthorServiceHandle implements AuthorService {
 
     @Override
     public void deleteAuthor(Long id) {
-        Author author = authorRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Could not find an author with this ID for deleting"));
-
-        authorRepository.delete(author);
+        authorRepository.deleteById(id);
     }
 }
