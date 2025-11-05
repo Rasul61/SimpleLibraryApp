@@ -19,14 +19,14 @@ public class Book {
     String title;
     int year;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id") // внешний ключ
-//    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+   // @JsonIgnore
     Author author;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "borrower_id")
-    //    @JsonIgnore
+   // @JsonIgnore
 
     Borrower borrower;
 }

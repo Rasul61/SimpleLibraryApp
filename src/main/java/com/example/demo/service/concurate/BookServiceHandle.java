@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.demo.mapper.AuthorMapper.AUTHOR_MAPPER;
 import static com.example.demo.mapper.BookMapper.entityToResponse;
+
 
 
 @Service

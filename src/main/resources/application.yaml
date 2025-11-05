@@ -1,0 +1,14 @@
+server:
+  port: 8080
+#  spring.application.name=demo2
+spring:
+  datasource:
+    username: root
+    url: jdbc:mysql://localhost:3306/java_basa
+    password: j@varasul2005
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
