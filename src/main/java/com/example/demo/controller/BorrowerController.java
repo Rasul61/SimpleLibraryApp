@@ -24,7 +24,7 @@ public class BorrowerController {
     }
 
     @GetMapping("/id/{id}")
-    Optional<Borrower> findWithId(@PathVariable Long id) {
+    BorrowerResponse findWithId(@PathVariable Long id) {
         return borrowerService.getById(id);
     }
 
@@ -34,7 +34,7 @@ public class BorrowerController {
     }
 
     @GetMapping
-    List<Borrower> findAll() {
+    List<BorrowerResponse> findAll() {
         return borrowerService.getAllBorrower();
     }
 

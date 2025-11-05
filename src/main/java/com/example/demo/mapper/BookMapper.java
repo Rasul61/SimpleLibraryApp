@@ -14,7 +14,7 @@ public class BookMapper {
     private final AuthorRepository authorRepository;
     private final BorrowerRepository borrowerRepository;
 
-    public BookResponse entityToResponse(Book book) {
+    public static BookResponse entityToResponse(Book book) {
         return BookResponse.builder().title(book.getTitle()).
                 year(book.getYear()).author(book.getAuthor()).
                 borrower(book.getBorrower()).build();

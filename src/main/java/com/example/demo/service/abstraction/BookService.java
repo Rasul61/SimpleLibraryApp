@@ -9,11 +9,11 @@ import java.util.List;
 public interface BookService {
     void createBook(BookRequest book);
 
-    List<Book> getAllBooks();
+    List<BookResponse> getAllBooks();
 
-    List<Book> findByTitle(String title);
+    List<BookResponse> findByTitle(String title);
 
-    List<Book> findByYear(Integer year);
+    List<BookResponse> findByYear(Integer year);
 
     void updateBook(Long id, BookRequest book);
 

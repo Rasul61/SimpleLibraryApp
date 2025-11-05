@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface BorrowerService {
     void createBorrower(BorrowerRequest borrower);
 
-    List<Borrower> getAllBorrower();
+    List<BorrowerResponse> getAllBorrower();
 
-    Optional<Borrower> getById(Long id);
+    BorrowerResponse getById(Long id);
 
     BorrowerResponse getByName(String name);
 

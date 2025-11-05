@@ -23,17 +23,17 @@ public class AuthorController {
     }
 
     @GetMapping
-    List<Author> getAuthors() {
+    List<AuthorResponse> getAuthors() {
         return authorService.getAllAuthors();
     }
 
     @GetMapping("/name/{name}")
-    List<Author> getByName(@PathVariable String name) {
+    List<AuthorResponse> getByName(@PathVariable String name) {
         return authorService.findByFullName(name);
     }
 
     @GetMapping("/country/{country}")
-    List<Author> getByCountry(@PathVariable String country) {
+    List<AuthorResponse> getByCountry(@PathVariable String country) {
         return authorService.findByCountry(country);
     }
 

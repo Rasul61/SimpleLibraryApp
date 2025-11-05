@@ -3,6 +3,7 @@ package com.example.demo.service.concurate;
 import com.example.demo.dto.request.BorrowerRequest;
 import com.example.demo.dto.response.BorrowerResponse;
 import com.example.demo.entity.Borrower;
+import com.example.demo.mapper.BookMapper;
 import com.example.demo.repository.BorrowerRepository;
 import com.example.demo.service.abstraction.BorrowerService;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +26,17 @@ public class BorrowerServiceHandle implements BorrowerService {
     }
 
     @Override
-    public List<Borrower> getAllBorrower() {
-        return borrowerRepository.findAll();
+    public List<BorrowerResponse> getAllBorrower() {
+        return borrowerRepository.findAll().stream().
+                map(BORROWER_MAPPER::entityToResponse).
+                toList();
     }
 
     @Override
-    public Optional<Borrower> getById(Long id) {
-        return borrowerRepository.findById(id);
+    public BorrowerResponse getById(Long id) {
+        Borrower borrower = borrowerRepository.findById(id).
+                orElseThrow(() -> new RuntimeException("Not found this borrower with id : " + id));
+        return BORROWER_MAPPER.entityToResponse(borrower);
     }
 
     @Override
@@ -56,9 +61,7 @@ public class BorrowerServiceHandle implements BorrowerService {
 
     @Override
     public void deleteBorrower(Long id) {
-        Borrower borrower = borrowerRepository.findById(id).
-                orElseThrow(() -> new RuntimeException("Could not find an borrower with this ID for deleting"));
-        borrowerRepository.delete(borrower);
+        borrowerRepository.deleteById(id);
 
 
     }
